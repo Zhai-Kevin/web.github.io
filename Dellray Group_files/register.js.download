@@ -1,0 +1,93 @@
+
+
+		  function onSubmit(token) {
+			  console.log("onSubmit()");
+			//alert('thanks ' + document.getElementById('first_name-4').value);
+			document.getElementById("email-form").submit();
+		  }
+
+		  function validate(event) {
+			  console.log("validate()");
+			event.preventDefault();
+			  
+			  
+			  
+			var errorMsg = false;
+			var currentElement;
+			  
+			
+			currentElement = document.getElementById('first_name');
+			if (!currentElement.value) {
+			  //alert("You must add text to the required field");
+				errorMsg = true; 
+				//$("first_name-4").addClass("form-error");
+				currentElement.classList.add('form-error');
+			}else{
+				currentElement.classList.remove('form-error');
+			}
+			
+			
+			currentElement = document.getElementById('last_name');
+			if (!currentElement.value) {
+				errorMsg = true; 
+				currentElement.classList.add('form-error');
+			}else{
+				currentElement.classList.remove('form-error');
+			}
+			  
+		
+			currentElement = document.getElementById('email');
+			matchElement = document.getElementById('con-email');
+			if (!currentElement.value) {
+				errorMsg = true; 
+				currentElement.classList.add('form-error');
+			} 
+			else if (!matchElement.value){
+				errorMsg = true;
+				matchElement.classList.add('form-error');
+			}
+			else if (currentElement.value !=  matchElement.value){
+				errorMsgcon = true;
+				matchElement.classList.add('form-error');
+			}
+			else{
+				errorMsgcon = false;
+				currentElement.classList.remove('form-error');
+			}
+			
+			currentElement = document.getElementById('postal_zip');
+			if (!currentElement.value) {
+				errorMsg = true; 
+				currentElement.classList.add('form-error');
+			}else{
+				currentElement.classList.remove('form-error');
+			}
+			  
+			  
+			currentElement = document.getElementById('how_did_you_hear');
+			if (!currentElement.value) {
+				errorMsg = true; 
+				currentElement.classList.add('form-error');
+			}else{
+				currentElement.classList.remove('form-error');
+			}  
+			
+			
+			if(errorMsg){
+				alert("Please fill all required fields");
+			}else if(errorMsgcon){
+				alert("Your email address is not matching please correct");
+			}
+			else{
+				grecaptcha.execute();
+			}			  
+			
+		  }
+		
+		
+		function onPageload() {
+			console.log("onPageload()");
+			var element = document.getElementById('btnSubmit');
+			element.onclick = validate;
+			
+		  }
